@@ -1,2 +1,2 @@
-# FoodPool---CitrusHack
+# FoodPool-CitrusHack
 CitrusHack 2020
