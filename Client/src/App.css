@@ -1,3 +1,5 @@
+@import '~antd/dist/antd.css';
+
 .App {
   text-align: center;
 }
@@ -7,6 +9,51 @@
   pointer-events: none;
 }
 
+.login-left-background {
+  background: url(./assets/login-pic.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  height: '100vh';
+}
+
+.signup-right-background {
+  background: url(./assets/login-pic.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  height: '100vh';
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+.box-shadow {
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+}
+
+.sign-up-centered {
+  margin-left:10vh;
+  margin-right:10vh;
+  margin-top: 5vh;
+  justify-content: center;
+  text-align: center;
+}
+
+.login-centered {
+  margin-left:10vh;
+  margin-right:10vh;
+  margin-top: 20vh;
+  justify-content: center;
+  text-align: center;
+}
+
+.centered {
+  padding-top:'50%';
+  position: fixed;
+  left: 50%; 
+  transform: translate(-50%, -50%);  
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -14,11 +61,11 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* background-color: #282c34; */
+  /* min-height: 100vh; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
@@ -36,3 +83,91 @@
     transform: rotate(360deg);
   }
 }
+
+/* .stripes, .stripes span {
+  position: absolute;
+  z-index: -1;
+}
+.stripes {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transform: skewY(-12deg);
+  transform-origin: 0;
+  background: linear-gradient(150deg, #53f 15%, #05d5ff 70%, #a6ffcb 94%)
+}
+.stripes span {
+  height: 40px
+}
+.stripes :nth-child(1) {
+  width: 50%;
+  left: 50%;
+  top: 40px;
+  background: #4c29ff
+}
+.stripes :nth-child(2) {
+  width: 14%;
+  right: 0;
+  bottom: 40px;
+  background: #2be7ff
+}
+.stripes :nth-child(3) {
+  width: 25%;
+  bottom: 0;
+  right: 0;
+  background: #a1ffc8
+}
+@media (min-width:670px) {
+  .stripes span {
+      height: 150px
+  }
+  .stripes :nth-child(1) {
+      top: 0;
+      background: #4750ff
+  }
+  .stripes :nth-child(2) {
+      width: 16.66667%;
+      top: 300px;
+      bottom: auto;
+      background: #0dcfff
+  }
+  .stripes :nth-child(3) {
+      width: 33.33333%;
+      right: auto;
+      background: #11bdff
+  }
+}
+@media (min-width:880px) {
+  .stripes span {
+      height: 190px
+  }
+  .stripes :nth-child(1) {
+      width: 33.33333%;
+      left: -16.66666%;
+      background: #53f
+  }
+  .stripes :nth-child(2) {
+      width: 33.33333%;
+      top: 0;
+      left: 16.66666%;
+      right: auto;
+      background: #4553ff
+  }
+  .stripes :nth-child(3) {
+      width: 33.33333%;
+      left: 49.99999%;
+      bottom: auto;
+      background: #4f40ff
+  }
+  .stripes :nth-child(4) {
+      width: 33.33333%;
+      top: 380px;
+      right: -16.66666%;
+      background: #25ddf5
+  }
+  .stripes :nth-child(5) {
+      width: 33.33333%;
+      bottom: 0;
+      background: #1fa2ff
+  }
+} */
