@@ -12,6 +12,7 @@ const {Text} = Typography
 const CommentList = ({ comments, title }) => (
     <div>
         <h2>Chatroom for {title}</h2>
+        <Card>
         <List
             dataSource={comments}
             itemLayout="horizontal"
@@ -20,6 +21,8 @@ const CommentList = ({ comments, title }) => (
             }
             style={{overflowY:'scroll', height: '50vh', marginBottom: '10%'}}
         />
+        </Card>
+        
     </div>
     
 );
@@ -35,7 +38,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
         <Col span={8}>
         <Form.Item>
         <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="default" style={{borderRadius: '12px'}}>
-            Add Comment
+            Enter
         </Button>
         </Form.Item>
         </Col>
@@ -158,13 +161,12 @@ class Chatroom extends Component {
             <div>
                 <Card style={{borderRadius: '12px', backgroundColor: '#F9DE92'}}>
                 <Row>
-                    <Col span={8}>
+                    <Col span={6}>
                         <GroupInfo orders={orders}/>
                     </Col>
-                    <Col span={8}>
+                    <Col span={1}/>
+                    <Col span={10}>
                         {<CommentList comments={comments} title={restaurant.title} />}
-
-                        <Divider style={{backgroundColor:'black'}}/>
 
                         <Comment
                         author={this.props.name}
@@ -178,7 +180,8 @@ class Chatroom extends Component {
                         }
                         />
                     </Col>
-                    <Col span={8}>
+                    <Col span={1}/>
+                    <Col span={6}>
                         <Row>
                             <Map shopLoc={shopLoc} roomUsers={roomUsers}/>
                         </Row>

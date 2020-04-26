@@ -28,6 +28,11 @@ class Map extends Component {
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
 
+        const {
+          roomUsers,
+        } = this.props;
+        console.log(roomUsers);
+
         const path = [ { "lat": 37.4254329, "lng": -122.1452003 },{ "lat": 37.428023,"lng": -122.143825 },{ "lat": 37.382221,"lng": -122.193769 } ];
 
         for (let i = 0; i < path.length-1; i++){
@@ -40,17 +45,15 @@ class Map extends Component {
     render() {
 
         const {
-          roomUsers,
           shopLoc,
         } = this.props;
 
-        console.log(roomUsers);
-        console.log(shopLoc);
-
         const center = {
-            "lat": 37.4015821,
-            "lng": -122.1933555,
+          "lat": 37.4015821,
+          "lng": -122.1933555,
         }
+
+        console.log(shopLoc);
 
         return (
 
