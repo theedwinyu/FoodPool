@@ -149,6 +149,8 @@ class Chatroom extends Component {
         const {
             restaurant,
             orders,
+            shopLoc,
+            roomUsers,
         } = this.props;
         console.log(restaurant)
         const { comments, submitting, value } = this.state;
@@ -178,7 +180,7 @@ class Chatroom extends Component {
                     </Col>
                     <Col span={8}>
                         <Row>
-                            <Map/>
+                            <Map shopLoc={shopLoc} roomUsers={roomUsers}/>
                         </Row>
                         <Row>
                             <Col style={{backgroundColor:'white',  color:'black'}} >

@@ -108,7 +108,7 @@ class Room extends Component {
                                     </Col>
                                     <Col span={1} /> */}
                                     <Col span={24} style={{backgroundColor:'white', color:'black'}}>
-                                        <Chatroom orders={this.state.orders} socket={this.state.socket} restaurant={restaurant} roomId={this.state.roomid} name={Cookie.getJSON('login').fullName}/>
+                                        <Chatroom shopLoc={{lat: this.state.shoplat, lng: this.state.shoplng}} roomUsers={this.state.users} orders={this.state.orders} socket={this.state.socket} restaurant={restaurant} roomId={this.state.roomid} name={Cookie.getJSON('login').fullName}/>
                                         
                                     </Col>
                                 </Row>

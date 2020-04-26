@@ -39,6 +39,14 @@ class Map extends Component {
 
     render() {
 
+        const {
+          roomUsers,
+          shopLoc,
+        } = this.props;
+
+        console.log(roomUsers);
+        console.log(shopLoc);
+
         const center = {
             "lat": 37.4015821,
             "lng": -122.1933555,
