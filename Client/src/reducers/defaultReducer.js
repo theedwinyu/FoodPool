@@ -2,11 +2,13 @@ import {
     UPDATE_MESSAGE,
     UPDATE_ADDRESS,
     UPDATE_NEARBY_RESULTS,
+    UPDATE_DISTANCE,
 } from '../actions/index';
 
 const defaults = {
     address: '',
     nearbyResults: [],
+    distance: null,
 };
 
 const reducer = (state = defaults, action) => {
@@ -32,6 +34,13 @@ const reducer = (state = defaults, action) => {
             return {
                 ...state,
                 nearbyResults,
+            };
+        }
+        case UPDATE_DISTANCE: {
+            const { distance } = action;
+            return {
+                ...state,
+                distance,
             };
         }
         default: {
