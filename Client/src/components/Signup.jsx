@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 import TextField from '@material-ui/core/TextField';
 import yellowLogo from '../assets/yellowLogo.png';
+import axios from 'axios';
 
 import Message from './Message';
 
@@ -23,7 +24,18 @@ class Signup extends Component {
 
     onFinish = values => {
         console.log('Success:', values);
-      };
+
+        const user = {
+            fullName: values.fullName,
+            phoneNumber: values.phoneNumber,
+            address: values.address,
+            email: values.email,
+            password: values.password
+        }
+
+        axios.post('http://localhost:5000/users/add', user)
+            .then(res=> { console.log("User Added!!") })
+    };
     
     onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);

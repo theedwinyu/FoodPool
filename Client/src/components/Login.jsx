@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 import TextField from '@material-ui/core/TextField';
 import yellowLogo from '../assets/yellowLogo.png';
+import axios from 'axios';
 
 import Message from './Message';
 
@@ -23,7 +24,26 @@ class Login extends Component {
 
     onFinish = values => {
         console.log('Success:', values);
-      };
+
+        let exist = "false";
+
+        const userInfo = {
+            phoneNumber: values.phoneNumber,    
+            password: values.password
+        }
+
+        axios.post('http://localhost:5000/users/userCheck', userInfo)
+        .then(res=> { exist = res})
+
+        console.log(exist);
+        
+        // if (exist === "true") {
+        //     //redirect
+        // } else {
+        //     //invalid input
+        // }
+
+    };
     
     onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
