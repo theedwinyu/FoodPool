@@ -44,11 +44,11 @@ class RestaurantSelect extends Component {
                                 <Divider />
                                 <LocationSearch />
                                 <Row style={{width: '90%', margin:'5%'}}>
-                                    <Col span={8} style={{backgroundColor:'white',  color:'black'}}>
+                                    <Col span={9} style={{backgroundColor:'white',  color:'black'}}>
                                         <RestaurantFilter nearbyResults={nearbyResults}/>
                                     </Col>
                                     <Col span={1} />
-                                    <Col span={15} style={{backgroundColor:'white', color:'black'}}>
+                                    <Col span={12} style={{backgroundColor:'white', color:'black'}}>
                                         <RestaurantList nearbyResults={nearbyResults}/>
                                     </Col>
                                 </Row>
