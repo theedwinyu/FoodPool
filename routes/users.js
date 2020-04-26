@@ -30,7 +30,7 @@ router.route('/add').post((req, res) => {
 router.route('/userCheck').post((req, res) => {
     const phoneNumber = req.body.phoneNumber;  
     const password = req.body.password;
-    var exists = "false";
+    var exists = null;
     console.log(req.body)
 
     User.find({phoneNumber: phoneNumber})
@@ -39,7 +39,7 @@ router.route('/userCheck').post((req, res) => {
         res.json(exists)
       } else {
         if (password === user[0].password) {
-            exists = "true"
+            exists = user[0]
             res.json(exists)
         } else {
             res.json(exists)

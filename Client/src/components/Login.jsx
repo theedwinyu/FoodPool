@@ -6,11 +6,12 @@ import PropTypes from 'prop-types';
 
 import { Input, Row, Col, Form, Button } from 'antd';
 
-import { Link } from "react-router-dom";
+import { Link,Redirect} from "react-router-dom";
 
 import TextField from '@material-ui/core/TextField';
 import yellowLogo from '../assets/yellowLogo.png';
 import axios from 'axios';
+import Cookie from "js-cookie"
 
 import Message from './Message';
 
@@ -21,6 +22,11 @@ import {
 const { Search } = Input;
 
 class Login extends Component {
+    state = {
+        redirect: false
+    }
+
+
 
     onFinish = values => {
         console.log('Success:', values);
@@ -33,9 +39,14 @@ class Login extends Component {
         }
 
         axios.post('http://localhost:5000/users/userCheck', userInfo)
-        .then(res=> { exist = res})
-
-        console.log(exist);
+        .then(res=> { 
+            if(res.data == null){
+                console.log("Wrong!")
+            } else {
+                Cookie.set("login",res.data,{expires:1})
+                this.setState({ redirect: true})
+            }
+            exist = res})
         
         // if (exist === "true") {
         //     //redirect
@@ -50,6 +61,9 @@ class Login extends Component {
     };
 
     render() {
+        if(this.state.redirect) {
+            return <Redirect to="select-location"/>
+        }
         return (
             <header className="login-centered">
                 {/* style={{ 
