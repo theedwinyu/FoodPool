@@ -59,6 +59,13 @@ class RestaurantList extends Component {
                     <IconText icon={StarOutlined} text={item.rating} key="rating" />,
                     <IconText icon={DollarOutlined} text={item.price_level} key="price_level" />
                   ]}
+                  // extra={
+                  //   <img
+                  //     width={272}
+                  //     alt="logo"
+                  //     src={item.picture}
+                  //   />
+                  // }
               >
                 <List.Item.Meta
                   title={<b>{item.title}</b>}

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import Cookie from 'js-cookie'
 import axios from 'axios'
 import { Link,Redirect} from "react-router-dom";
+import io from 'socket.io-client'
 
 import { Modal, Button, Row, Col, List, Comment, Input, Card, Divider } from 'antd';
 import TextField from '@material-ui/core/TextField';
 
-import { Redirect } from 'react-router-dom';
 
 import { CheckOutlined } from '@ant-design/icons';
 
@@ -22,6 +22,7 @@ class OrderModal extends Component {
             visible: false,
             orderValues: [],
             data: [],
+            done: false
         }
     }
 
@@ -32,9 +33,47 @@ class OrderModal extends Component {
       };
     
     handleOk = e => {
-        this.setState({
-            done: true,
-        });
+        axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+JSON.parse(Cookie.get("login")).address+"&key="+process.env.REACT_APP_GOOGLE_MAPS_KEY)
+        .then(resp => {
+            console.log(resp)
+            if(resp.data.results.length > 0){
+                console.log("passsed")
+
+                const room = {
+                    shoplng:this.props.restaurant.location.lng,
+                    shoplat:this.props.restaurant.location.lat,
+                    lng:resp.data.results[0].geometry.location.lng,
+                    lat:resp.data.results[0].geometry.location.lat,
+                    name:JSON.parse(Cookie.get("login")).fullName,
+                    gid:this.props.restaurant.id,
+                    orders:[JSON.parse(Cookie.get("login")).fullName,...(this.state.orderValues)]
+
+                }
+                console.log(room)
+                axios.post("http://localhost:5000/rooms/join",room)
+                    .then(res=>{
+                        console.log(res)
+                        console.log("kys")
+                        Cookie.set("room",{
+                            roomid:res.data,
+                            myOrder:room.orders,
+                            myuinfo:JSON.stringify({name:room.name,lat:room.lat,lng:room.lng})
+                        })
+
+                        console.log(Cookie.get("room"))
+
+                        this.setState({
+                            done: true
+                        });
+                    })
+                    .catch(err=>{
+                        console.log(err)
+                        console.log("kms")
+                    })
+
+            }
+
+        })
 
     };
     
@@ -57,17 +96,15 @@ class OrderModal extends Component {
     }
 
     render() {
-        if(this.state.redirect) {
-            return <Redirect to="room"/>
-        }
         const {
             restaurant,
         } = this.props;
 
         if (this.state.done) {
             console.log(restaurant, this.state.orderValues)
-            return <Redirect to={{ pathname: '/room', state: { orderValues: this.state.orderValues, restaurant }}} />
+            return <Redirect to={'/room'} />
         }
+
         
         const restaurantTitle = [{
             content: (
