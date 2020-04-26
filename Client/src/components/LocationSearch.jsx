@@ -1,78 +1,96 @@
 import React, { Component } from 'react';
 
-import PlacesAutocomplete from 'react-places-autocomplete';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { Input } from 'antd';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+// If you want to use the provided css
+import 'react-google-places-autocomplete/dist/index.min.css';
+import axios from 'axios';
+
+import { CompassOutlined } from '@ant-design/icons';
+
+import {
+  updateAddress,
+  updateNearbyResults,
+} from '../actions/index';
+
+import { Input, AutoComplete, Select } from 'antd';
 const { Search } = Input;
+const { Option } = Select;
 
 class LocationSearch extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = { address: '' };
-    }
-
-    handleChange = address => {
-        this.setState({ address });
-    };
      
     handleSelect = address => {
-        console.log("handleselect: ", address);
-        this.setState({ address });
+    
+      const {
+        onUpdateAddress,
+        onUpdateNearbyResults,
+      } = this.props;
+
+      const query = `restaurants near ${address.description}`
+
+      const proxyurl = "https://cors-anywhere.herokuapp.com/"
+      const nearbyURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+query+"&key=" + process.env.REACT_APP_GOOGLE_MAPS_KEY;
+      
+      
+      axios.get(proxyurl + nearbyURL).then(nearbyResult => {
+          onUpdateAddress(address.description);
+          onUpdateNearbyResults(nearbyResult.data.results)
+        }
+      );
+
     };
      
       render() {
+
         return (
-          <PlacesAutocomplete
-            value={this.state.address}
-            onChange={this.handleChange}
-            onSelect={this.handleSelect}
-          >
-            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-              <div>
-                  <Search
-                    {...getInputProps({
-                        placeholder: 'Search Places ...',
-                        className: 'location-search-input',
-                    })}
-                    // placeholder="input search text"
-                    // onSearch={value => console.log(value)}
-                    // style={{ width: 200 }}
-                />
-                {/* <Input
-                  {...getInputProps({
-                    placeholder: 'Search Places ...',
-                    className: 'location-search-input',
-                  })}
-                /> */}
-                <div className="autocomplete-dropdown-container">
-                  {loading && <div>Loading...</div>}
-                  {suggestions.map(suggestion => {
-                    const className = suggestion.active
-                      ? 'suggestion-item--active'
-                      : 'suggestion-item';
-                    // inline style for demonstration purpose
-                    const style = suggestion.active
-                      ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                      : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                    return (
-                      <div
-                        {...getSuggestionItemProps(suggestion, {
-                          className,
-                          style,
-                        })}
-                      >
-                        <span>{suggestion.description}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </PlacesAutocomplete>
+          <div style={{width: '60%', marginLeft: '20%'}}>
+            <GooglePlacesAutocomplete
+              onSelect={this.handleSelect}
+              apiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY}
+            />
+          </div>
+        
         );
       }
 
 }
 
-export default LocationSearch;
+LocationSearch.defaultProps = {
+  address: '',
+  nearbyResults: [],
+};
+
+LocationSearch.propTypes = {
+  onUpdateAddress: PropTypes.func.isRequired,
+  address: PropTypes.string,
+  onUpdateNearbyResults: PropTypes.func.isRequired,
+  nearbyResults: PropTypes.array,
+};
+
+const mapStateToProps = (state) => {
+  const {
+      address,
+      nearbyResults
+  } = state.default;
+
+  console.log(state);
+
+  return {
+      address,
+      nearbyResults,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  onUpdateAddress: (address) => {
+      dispatch(updateAddress(address));
+  },
+  onUpdateNearbyResults: (nearbyResults) => {
+    dispatch(updateNearbyResults(nearbyResults))
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LocationSearch);
