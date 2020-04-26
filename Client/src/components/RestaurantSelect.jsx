@@ -31,7 +31,7 @@ class RestaurantSelect extends Component {
                     <Card bordered={false} style={{ backgroundColor: '#E7F0C3'}}>
                         <Row className="box-shadow" style={{width:'100%', height:'100%'}}>
 
-                            <Col className='' span={24} style={{backgroundColor:'white', color:'black'}}>
+                            <Col span={24} style={{backgroundColor:'white', color:'black'}}>
                                 <img src={newLogo} style={{width: '25%', height: 'auto', marginTop:'2%'}}/>
                                 <Divider />
                                 <LocationSearch />
