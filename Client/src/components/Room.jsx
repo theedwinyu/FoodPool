@@ -85,7 +85,7 @@ class Room extends Component {
         }
         return(
             <div className="App" >
-                <h3>{"ro "+JSON.stringify(this.state.orders)}</h3>
+                {/* <h3>{"ro "+JSON.stringify(this.state.orders)}</h3>
                 <h3>{"rus "+JSON.stringify(this.state.users)}</h3>
                 <h3>{"rsln "+JSON.stringify(this.state.shoplng)}</h3>
                 <h3>{"rsla "+JSON.stringify(this.state.shoplat)}</h3>
@@ -93,7 +93,7 @@ class Room extends Component {
                 <h3>{"rla "+JSON.stringify(this.state.lat)}</h3>
                 <h3>{"rgid "+JSON.stringify(this.state.gid)}</h3>
                 <h3>{"rid "+JSON.stringify(this.state.roomid)}</h3>
-                <h3>{"rcmts "+JSON.stringify(this.state.comments)}</h3>
+                <h3>{"rcmts "+JSON.stringify(this.state.comments)}</h3> */}
                 <header className="App-header" style={{ backgroundColor: '#E7F0C3'}}>
                     <Card bordered={false} style={{ backgroundColor: '#E7F0C3'}}>
                         <Row className="box-shadow" style={{width:'100%', height:'100%'}}>
@@ -109,7 +109,6 @@ class Room extends Component {
                                     <Col span={1} /> */}
                                     <Col span={24} style={{backgroundColor:'white', color:'black'}}>
                                         <Chatroom shopLoc={{lat: this.state.shoplat, lng: this.state.shoplng}} roomUsers={this.state.users} orders={this.state.orders} socket={this.state.socket} restaurant={restaurant} roomId={this.state.roomid} name={Cookie.getJSON('login').fullName}/>
-                                        
                                     </Col>
                                 </Row>
                                 
