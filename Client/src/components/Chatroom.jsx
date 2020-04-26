@@ -193,7 +193,7 @@ class Chatroom extends Component {
                         <Row>
                             <Col style={{backgroundColor:'white',  color:'black'}} >
                                 <Card title = "Route details">
-                                    <p>Shortest Possible Route distance: {distance} miles</p>
+                                    <p>Shortest Possible Route distance: {distance || 'N/A'} miles</p>
                                     <p>Driver: {name}</p>
                                 </Card>
                             </Col>
@@ -210,7 +210,7 @@ class Chatroom extends Component {
 
 Chatroom.defaultProps = {
     distance: null,
-    name: '',
+    name: 'None',
 };
 
 Chatroom.propTypes = {

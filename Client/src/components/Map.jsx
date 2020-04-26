@@ -150,16 +150,20 @@ class Map extends Component {
         console.log(shopLoc);
 
         const result = this.bestPersonRoute(convertedUsers, shopLoc)
-        onUpdateDistance(result.distance);
-        console.log(result.path[0].name);
-        onUpdateMessage(result.path[0].name);
+        
+        if(result.path && result.path.length){
+          onUpdateDistance(result.distance);
+          onUpdateMessage(result.path[0].name);
+          for (let i = 0; i < result.path.length-1; i++){
+            this.calculateAndDisplayRoute(directionsService, directionsDisplay, result.path);
+          }
+        }
+        
         // console.log(path);
 
         // const path = [ { "lat": 37.4254329, "lng": -122.1452003 },{ "lat": 37.428023,"lng": -122.143825 },{ "lat": 37.382221,"lng": -122.193769 } ];
 
-        for (let i = 0; i < result.path.length-1; i++){
-            this.calculateAndDisplayRoute(directionsService, directionsDisplay, result.path);
-        }
+        
 
         directionsDisplay.setMap(google.map);
     }
