@@ -26,7 +26,7 @@ class Room extends Component {
     }
 
     componentDidMount(){
-        const socket = io("http://localhost:5000")
+        const socket = io("/");
         console.log("kakakakak")
         console.log(JSON.parse(Cookie.get("room")))
         console.log("kakakakak")
@@ -54,7 +54,7 @@ class Room extends Component {
         })
         const arg = {roomid:JSON.parse(Cookie.get("room")).roomid}
         console.log(arg)
-        axios.post("http://localhost:5000/rooms/get",arg)
+        axios.post("/rooms/get",arg)
         .then(res=>{
             console.log("FUCKING FUCK WHAT THE TRFUCFVKL")
             console.log(res)

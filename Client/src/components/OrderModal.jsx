@@ -53,7 +53,7 @@ class OrderModal extends Component {
 
                 }
                 console.log(room)
-                axios.post("http://localhost:5000/rooms/join",room)
+                axios.post("/rooms/join",room)
                     .then(res=>{
                         console.log(res)
                         console.log("kys")

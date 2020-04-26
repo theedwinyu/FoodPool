@@ -37,7 +37,7 @@ class Signup extends Component {
             password: values.password
         }
 
-        axios.post('http://localhost:5000/users/add', user)
+        axios.post('/users/add', user)
             .then(res=> { 
                 this.setState({redirect:true})
                 console.log("User Added!!") })

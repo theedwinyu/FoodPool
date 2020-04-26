@@ -34,8 +34,7 @@ class LocationSearch extends Component {
       const proxyurl = "https://cors-anywhere.herokuapp.com/"
       const nearbyURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+query+"&key=" + process.env.REACT_APP_GOOGLE_MAPS_KEY;
       
-      
-      axios.get(proxyurl + nearbyURL).then(nearbyResult => {
+      axios.get(nearbyURL).then(nearbyResult => {
           onUpdateAddress(address.description);
           onUpdateNearbyResults(nearbyResult.data.results)
         }

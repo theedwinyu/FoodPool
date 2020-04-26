@@ -40,7 +40,7 @@ class Login extends Component {
             password: values.password
         }
 
-        axios.post('http://localhost:5000/users/userCheck', userInfo)
+        axios.post('/users/userCheck', userInfo)
         .then(res=> { 
             if(res.data == null){
                 console.log("Wrong!")
