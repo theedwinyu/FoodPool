@@ -14,6 +14,8 @@ import greenLogo from '../assets/greenLogo.png';
 
 import newLogo from '../assets/newLogo.png';
 
+import backgroundImage from '../assets/list-background.jpg';
+
 class RestaurantSelect extends Component {
 
     render() {
@@ -24,24 +26,24 @@ class RestaurantSelect extends Component {
 
         return ( 
             <div className="App" >
-                <h1>{JSON.stringify(Cookie.get("login"))}</h1>
+                {/* <h1>{JSON.stringify(Cookie.get("login"))}</h1> */}
                 <header className="App-header" style={{ backgroundColor: '#E7F0C3'}}>
                     <Card bordered={false} style={{ backgroundColor: '#E7F0C3'}}>
                         <Row className="box-shadow" style={{width:'100%', height:'100%'}}>
 
-                            <Col span={24} style={{backgroundColor:'white', color:'black'}}>
-                            <img src={newLogo} style={{width: '25%', height: 'auto', marginTop:'2%'}}/>
-                            <Divider />
-                            <LocationSearch />
-                            <Row style={{width: '90%', margin:'5%'}}>
-                                <Col span={8} style={{backgroundColor:'white',  color:'black'}}>
-                                    <RestaurantFilter nearbyResults={nearbyResults}/>
-                                </Col>
-                                <Col span={1} />
-                                <Col span={15} style={{backgroundColor:'white', color:'black'}}>
-                                    <RestaurantList nearbyResults={nearbyResults}/>
-                                </Col>
-                            </Row>
+                            <Col className='' span={24} style={{backgroundColor:'white', color:'black'}}>
+                                <img src={newLogo} style={{width: '25%', height: 'auto', marginTop:'2%'}}/>
+                                <Divider />
+                                <LocationSearch />
+                                <Row style={{width: '90%', margin:'5%'}}>
+                                    <Col span={8} style={{backgroundColor:'white',  color:'black'}}>
+                                        <RestaurantFilter nearbyResults={nearbyResults}/>
+                                    </Col>
+                                    <Col span={1} />
+                                    <Col span={15} style={{backgroundColor:'white', color:'black'}}>
+                                        <RestaurantList nearbyResults={nearbyResults}/>
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
                         

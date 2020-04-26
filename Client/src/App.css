@@ -9,6 +9,14 @@
   pointer-events: none;
 }
 
+.restaurant-list-background {
+  background: url(./assets/list-background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  height: '100vh';
+}
+
 .login-left-background {
   background: url(./assets/login-pic.jpg);
   background-size: cover;

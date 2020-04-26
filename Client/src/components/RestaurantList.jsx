@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import { List, Button } from 'antd';
-import { DollarOutlined, StarOutlined, CheckOutlined } from '@ant-design/icons';
+import { List } from 'antd';
+import { DollarOutlined, StarOutlined } from '@ant-design/icons';
 
-import axios from 'axios';
+import OrderModal from './OrderModal';
 
 class RestaurantList extends Component {
 
@@ -21,11 +21,13 @@ class RestaurantList extends Component {
         const listData = nearbyResults.map((res,index) => {
             return {
                 title: res.name,
-                description: res.formatted_address,
+                formatted_address: res.formatted_address,
                 price_level: res.price_level,
                 rating: res.rating,
                 picture: photos[index],
-                open_now: res.business_status === 'OPERATIONAL' ? res.opening_hours.open_now : false,
+                open_now: res.business_status === 'OPERATIONAL' && res.opening_hours ? res.opening_hours.open_now : false,
+                id: res.id,
+                location: res.geometry.location,
             }
         })
 
@@ -67,14 +69,12 @@ class RestaurantList extends Component {
               >
                 <List.Item.Meta
                   title={<b>{item.title}</b>}
-                  description={item.description}
+                  formatted_address={item.formatted_address}
                 />
                 {item.open_now ? 'Open Now!' : 'Closed for now'}
                 <br></br>
                 <br></br>
-                <Button type="default" shape="round" icon={<CheckOutlined />} style={{backgroundColor: '#A4D4AE'}}>
-                Select Restaurant
-                </Button>
+                <OrderModal restaurant={item}/>
                 <br></br>
               </List.Item>
             )}
