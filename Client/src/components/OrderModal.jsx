@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Modal, Button, Row, Col, List, Comment, Input, Card, Divider } from 'antd';
 import TextField from '@material-ui/core/TextField';
 
+import { Redirect } from 'react-router-dom';
+
 import { CheckOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
@@ -16,6 +18,7 @@ class OrderModal extends Component {
             visible: false,
             orderValues: [],
             data: [],
+            done: false,
         }
     }
 
@@ -27,9 +30,11 @@ class OrderModal extends Component {
     
     handleOk = e => {
         console.log(this.state.orderValues);
+
         this.setState({
-            visible: false,
+            done: true,
         });
+
     };
     
     handleCancel = e => {
@@ -54,6 +59,11 @@ class OrderModal extends Component {
         const {
             restaurant,
         } = this.props;
+
+        if (this.state.done) {
+            console.log(restaurant, this.state.orderValues)
+            return <Redirect to={{ pathname: '/room', state: { orderValues: this.state.orderValues, restaurant }}} />
+        }
         
         const restaurantTitle = [{
             content: (

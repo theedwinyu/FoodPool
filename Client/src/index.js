@@ -5,6 +5,7 @@ import LoginPage from './components/LoginPage';
 import RestaurantSelect from './components/RestaurantSelect';
 import SignupPage from './components/SignupPage';
 import Room from './components/Room';
+import Map from './components/Map';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -26,6 +27,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
+        <Route path="/map" component={Map} />
         <Route path="/room" component={Room} />
         <Route path="/select-location" component={RestaurantSelect} />
         <Route path="/signup" component={SignupPage} />

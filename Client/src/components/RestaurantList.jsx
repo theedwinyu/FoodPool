@@ -13,10 +13,10 @@ class RestaurantList extends Component {
         } = this.props;
         console.log(nearbyResults);
 
-        const photos = nearbyResults.map(res => 
-            "https://maps.googleapis.com/maps/api/place/photo?maxwidth=272&photoreference="+res.photos[0].photo_reference+"&key=" + process.env.REACT_APP_GOOGLE_MAPS_KEY
-        );
-        console.log(photos);
+        // const photos = nearbyResults.map(res => 
+        //     "https://maps.googleapis.com/maps/api/place/photo?maxwidth=272&photoreference="+res.photos[0].photo_reference+"&key=" + process.env.REACT_APP_GOOGLE_MAPS_KEY
+        // );
+        // console.log(photos);
 
         const listData = nearbyResults.map((res,index) => {
             return {
@@ -24,7 +24,7 @@ class RestaurantList extends Component {
                 formatted_address: res.formatted_address,
                 price_level: res.price_level,
                 rating: res.rating,
-                picture: photos[index],
+                // picture: photos[index],
                 open_now: res.business_status === 'OPERATIONAL' && res.opening_hours ? res.opening_hours.open_now : false,
                 id: res.id,
                 location: res.geometry.location,
@@ -63,7 +63,7 @@ class RestaurantList extends Component {
                   <img
                     width={272}
                     alt="logo"
-                    src={item.picture}
+                    // src={item.picture}
                   />
                 }
               >
