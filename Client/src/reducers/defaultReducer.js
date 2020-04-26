@@ -1,9 +1,12 @@
 import {
     UPDATE_MESSAGE,
+    UPDATE_ADDRESS,
+    UPDATE_NEARBY_RESULTS,
 } from '../actions/index';
 
 const defaults = {
-    message: '',
+    address: '',
+    nearbyResults: [],
 };
 
 const reducer = (state = defaults, action) => {
@@ -14,6 +17,21 @@ const reducer = (state = defaults, action) => {
             return {
                 ...state,
                 message,
+            };
+        }
+        case UPDATE_ADDRESS: {
+            const { address } = action;
+      
+            return {
+                ...state,
+                address,
+            };
+        }
+        case UPDATE_NEARBY_RESULTS: {
+            const { nearbyResults } = action;
+            return {
+                ...state,
+                nearbyResults,
             };
         }
         default: {

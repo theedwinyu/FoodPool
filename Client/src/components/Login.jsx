@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 import TextField from '@material-ui/core/TextField';
 import yellowLogo from '../assets/yellowLogo.png';
+import topLogo from '../assets/topLogo.png';
 
 import Message from './Message';
 
@@ -35,7 +36,7 @@ class Login extends Component {
                 {/* style={{ 
                     marginLeft: '10vh', marginRight: '10vh', marginTop: '30vh', justifyContent: 'center', textAlign: 'center' 
                 }} */}
-                <img src={yellowLogo} style={{width: '70%', height: 'auto'}}/>
+                <img src={topLogo} style={{width: '50%', height: 'auto'}}/>
                 <p></p>
                 <h2 style={{textAlign:'left'}}>Login</h2>
                 <Form
