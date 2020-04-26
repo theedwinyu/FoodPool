@@ -42,7 +42,7 @@ io.on('connection',(socket)=>{
   })
 
   socket.on("sentComment",(roomID, name, message)=>{
-    console.log('sent comment ' + message);
+    console.log('sent comment ' + roomID + ", " + message);
     io.to(roomID).emit("newMessage", name, message);
   })
 

@@ -5,12 +5,13 @@ import moment from 'moment';
 import axios from 'axios';
 
 import Map from './Map';
+import GroupInfo from './GroupInfo';
 
 const {Text} = Typography
 
-const CommentList = ({ comments }) => (
+const CommentList = ({ comments, title }) => (
     <div>
-        <h2>Chatroom</h2>
+        <h2>Chatroom for {title}</h2>
         <List
             dataSource={comments}
             itemLayout="horizontal"
@@ -71,6 +72,25 @@ class Chatroom extends Component {
         //     }
         // }) 
 
+        socket.on("newMessage",(name,message)=>{
+            console.log(name, myName, message);
+            if (name !== myName){
+                console.log(myName, name, message);
+                this.setState({
+                    comments: [
+                        {
+                            author: name,
+                            content: <Card style={{borderRadius: '12px'}}><p>{message}</p></Card>,
+                            style: this.formatStyle(true),
+                        },
+                        ...this.state.comments,
+                    
+                    ],
+                })
+            }
+            
+        })
+
     }
 
     formatMessage = (message,name,formatLeft) => {
@@ -91,13 +111,14 @@ class Chatroom extends Component {
     }
 
     handleSubmit = () => {
-        const { name, socket, roomID } = this.props;
-
-        // socket.emit("sentComment",roomID,name,this.state.value)
+        const { name, socket, roomId } = this.props;
 
         if (!this.state.value) {
             return;
         }
+
+        console.log(roomId);
+        socket.emit("sentComment",roomId,name,this.state.value)
 
         this.setState({
             comments: [
@@ -125,13 +146,21 @@ class Chatroom extends Component {
     };
 
     render(){
+        const {
+            restaurant,
+            orders,
+        } = this.props;
+        console.log(restaurant)
         const { comments, submitting, value } = this.state;
         return (
             <div>
                 <Card style={{borderRadius: '12px', backgroundColor: '#F9DE92'}}>
                 <Row>
-                    <Col span={15}>
-                        {<CommentList comments={comments} />}
+                    <Col span={8}>
+                        <GroupInfo orders={orders}/>
+                    </Col>
+                    <Col span={8}>
+                        {<CommentList comments={comments} title={restaurant.title} />}
 
                         <Divider style={{backgroundColor:'black'}}/>
 
@@ -147,7 +176,6 @@ class Chatroom extends Component {
                         }
                         />
                     </Col>
-                    <Col span={1}/>
                     <Col span={8}>
                         <Row>
                             <Map/>

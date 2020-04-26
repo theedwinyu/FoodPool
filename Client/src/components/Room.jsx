@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Card, Row, Col, Divider } from 'antd';
+import { Card, Row, Col, Divider, Spin } from 'antd';
 import newLogo from '../assets/newLogo.png';
 import Chatroom from './Chatroom';
 
@@ -48,11 +48,7 @@ class Room extends Component {
                 })
             }
         })
-        socket.on("newMessage",(name,message)=>{
-            this.setState({
-                comments:this.state.comments.append({name:name,message:message})
-            })
-        })
+    
         this.setState({
             socket:socket
         })
@@ -79,6 +75,14 @@ class Room extends Component {
 
     render(){
 
+        const restaurant = JSON.parse(JSON.parse(Cookie.get('room')).restaurant);
+
+        const {
+            socket,
+        } = this.state;
+        if(!socket) {
+            return <Spin></Spin>
+        }
         return(
             <div className="App" >
                 <h3>{"ro "+JSON.stringify(this.state.orders)}</h3>
@@ -104,7 +108,8 @@ class Room extends Component {
                                     </Col>
                                     <Col span={1} /> */}
                                     <Col span={24} style={{backgroundColor:'white', color:'black'}}>
-                                        <Chatroom restaurant={restaurant} name="Edwin"/>
+                                        <Chatroom orders={this.state.orders} socket={this.state.socket} restaurant={restaurant} roomId={this.state.roomid} name={Cookie.getJSON('login').fullName}/>
+                                        
                                     </Col>
                                 </Row>
                                 
