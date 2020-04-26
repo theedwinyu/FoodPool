@@ -33,6 +33,9 @@ class OrderModal extends Component {
       };
     
     handleOk = e => {
+        const {
+            restaurant,
+        } = this.props;
         axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+JSON.parse(Cookie.get("login")).address+"&key="+process.env.REACT_APP_GOOGLE_MAPS_KEY)
         .then(resp => {
             console.log(resp)
@@ -57,7 +60,8 @@ class OrderModal extends Component {
                         Cookie.set("room",{
                             roomid:res.data,
                             myOrder:room.orders,
-                            myuinfo:JSON.stringify({name:room.name,lat:room.lat,lng:room.lng})
+                            myuinfo:JSON.stringify({name:room.name,lat:room.lat,lng:room.lng}),
+                            restaurant: JSON.stringify(restaurant),
                         })
 
                         console.log(Cookie.get("room"))
@@ -102,7 +106,9 @@ class OrderModal extends Component {
 
         if (this.state.done) {
             console.log(restaurant, this.state.orderValues)
-            return <Redirect to={'/room'} />
+            // return <Redirect to={'/room'}  />
+            return <Redirect to={{ pathname: '/room', state: { restaurant }}} />
+
         }
 
         
