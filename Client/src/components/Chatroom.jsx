@@ -33,14 +33,14 @@ const CommentList = ({ comments, title }) => (
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
     <div >
         <Row>
-        <Col span={16}>
+        <Col span={20}>
         <Form.Item>
         <Input onChange={onChange} value={value} placeholder="Send a message!" style={{borderRadius: '12px'}}/>
         </Form.Item>
         </Col>
-        <Col span={8}>
+        <Col span={4}>
         <Form.Item>
-        <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="default" style={{borderRadius: '12px'}}>
+        <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="default" style={{borderRadius: '12px', width: '10vh'}}>
             Enter
         </Button>
         </Form.Item>
@@ -89,14 +89,11 @@ class Chatroom extends Component {
                             content: <Card style={{borderRadius: '12px'}}><p>{message}</p></Card>,
                             style: this.formatStyle(true),
                         },
-                        ...this.state.comments,
-                    
+                        ...this.state.comment       
                     ],
                 })
-            }
-            
+            }  
         })
-
     }
 
     formatMessage = (message,name,formatLeft) => {
@@ -112,7 +109,7 @@ class Chatroom extends Component {
     formatStyle = (formatLeft) => {
         return {
             marginLeft: formatLeft ? '0%' : '50%',
-            width: '50%',
+            width: '45%',
         }
     }
 
@@ -130,7 +127,7 @@ class Chatroom extends Component {
             comments: [
                 {
                     author: name,
-                    content: <Card style={{borderRadius: '12px'}}><p>{this.state.value}</p></Card>,
+                    content: <Card style={{borderRadius: '12px', backgroundColor: '#F9EEDA'}}><p>{this.state.value}</p></Card>,
                     style: this.formatStyle(false),
                 },
                 ...this.state.comments,
@@ -164,7 +161,7 @@ class Chatroom extends Component {
         const { comments, submitting, value } = this.state;
         return (
             <div>
-                <Card style={{borderRadius: '12px', backgroundColor: '#F9DE92'}}>
+                <Card style={{marginTop: '-7vh', borderRadius: '12px', backgroundColor: '#F9EEDA'}}>
                 <Row>
                     <Col span={6}>
                         <GroupInfo orders={orders}/>
@@ -191,8 +188,8 @@ class Chatroom extends Component {
                             <Map shopLoc={shopLoc} roomUsers={roomUsers}/>
                         </Row>
                         <Row>
-                            <Col style={{backgroundColor:'white',  color:'black'}} >
-                                <Card title = "Route details">
+                            <Col style={{ borderRadius: '12px', backgroundColor:'white',  color:'black', height: '28vh', width: '50vh', marginTop: '15px'}} >
+                                <Card style = {{borderRadius: '12px'}} title = "Route details">
                                     <p>Shortest Possible Route distance: {distance || 'N/A'} miles</p>
                                     <p>Driver: {name}</p>
                                 </Card>

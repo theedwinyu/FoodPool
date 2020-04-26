@@ -11,8 +11,8 @@ class GroupInfo extends Component {
             orders
         } = this.props;
         return (
-            <Card style={{backgroundColor: '#A4D4AE', borderRadius: '5px'}}>
-                <h2>Everyone's Orders</h2>
+            <Card style={{backgroundColor: '#A4D4AE', borderRadius: '7px', height: '80vh'}}>
+                <h2 style = {{marginBottom: '30px'}}>Everyone's Orders</h2>
                 <Collapse defaultActiveKey={['1']}>
                     {
                         orders.map(item => {
