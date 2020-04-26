@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Cookie from 'js-cookie'
+import { Link,Redirect} from "react-router-dom";
 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -18,7 +19,14 @@ import backgroundImage from '../assets/list-background.jpg';
 
 class RestaurantSelect extends Component {
 
+    state = {
+        redirect: (Cookie.get("room")!=null)
+    }
+
     render() {
+        if(this.state.redirect){
+            return <Redirect to="room"/>
+        }
         const {
             address,
             nearbyResults

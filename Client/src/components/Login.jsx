@@ -25,7 +25,7 @@ const { Search } = Input;
 
 class Login extends Component {
     state = {
-        redirect: false
+        redirect: (Cookie.get("login")!=null)
     }
 
 
