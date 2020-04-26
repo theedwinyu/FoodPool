@@ -7,6 +7,9 @@ import axios from 'axios';
 import Map from './Map';
 import GroupInfo from './GroupInfo';
 
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 const {Text} = Typography
 
 const CommentList = ({ comments, title }) => (
@@ -154,6 +157,8 @@ class Chatroom extends Component {
             orders,
             shopLoc,
             roomUsers,
+            distance,
+            name,
         } = this.props;
         console.log(restaurant)
         const { comments, submitting, value } = this.state;
@@ -187,7 +192,10 @@ class Chatroom extends Component {
                         </Row>
                         <Row>
                             <Col style={{backgroundColor:'white',  color:'black'}} >
-                                <h2>hi</h2>
+                                <Card title = "Route details">
+                                    <p>Shortest Possible Route distance: {distance} miles</p>
+                                    <p>Driver: {name}</p>
+                                </Card>
                             </Col>
 
                         </Row>
@@ -200,4 +208,26 @@ class Chatroom extends Component {
     }
 }
 
-export default Chatroom;
+Chatroom.defaultProps = {
+    distance: null,
+    name: '',
+};
+
+Chatroom.propTypes = {
+    distance: PropTypes.number,
+    name: PropTypes.string,
+};
+
+const mapStateToProps = (state) => {
+    const {
+        distance,
+        message,
+    } = state.default;
+
+    return {
+        distance,
+        name: message,
+    };
+};
+  
+export default connect(mapStateToProps)(Chatroom);

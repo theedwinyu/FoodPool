@@ -17,3 +17,10 @@ export const updateNearbyResults = (nearbyResults) => ({
   type: UPDATE_NEARBY_RESULTS,
 });
 
+export const UPDATE_DISTANCE = 'UPDATE_DISTANCE';
+export const updateDistance = (distance) => ({
+  distance,
+  type: UPDATE_DISTANCE,
+});
+
+
