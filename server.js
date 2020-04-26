@@ -13,16 +13,18 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect( process.env.MONGODB_URI || uri, { dbName:"", useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
+mongoose.connect( process.env.MONGODB_URI || uri, { dbName:"FoodPoolDB", useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
 
-const classesRouter = require('./routes/classes');
+// const restaurantsRouter = require('./routes/restaurants');
+const usersRouter = require('./routes/users');
 
-app.use('/classes', classesRouter);
+// app.use('/restaurants', restaurantsRouter);
+app.use('/users', usersRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
