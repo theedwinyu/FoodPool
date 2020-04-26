@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
+import { Card } from 'antd';
+
 class Map extends Component {
 
     calculateAndDisplayRoute = (directionsService, directionsDisplay, path) => {
@@ -44,7 +46,8 @@ class Map extends Component {
 
         return (
 
-            <div style={{ height: '100vh', width: '100%' }}>
+            <div style={{ height: '50vh', width: '100%', borderRadius: '12px' }}>
+                {/* <Card> */}
                 <GoogleMapReact
                 bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_KEY }}
                 defaultCenter={center}
@@ -54,6 +57,8 @@ class Map extends Component {
                 >
     
                 </GoogleMapReact>
+                {/* </Card> */}
+
             </div>
         );
     }

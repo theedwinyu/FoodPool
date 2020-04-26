@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { Card, Row, Col, Divider } from 'antd';
 import newLogo from '../assets/newLogo.png';
+import Chatroom from './Chatroom';
 
 import { withRouter } from "react-router-dom"
 
@@ -24,12 +25,12 @@ class Room extends Component {
                                 <Divider />
 
                                 <Row style={{width: '90%', margin:'5%'}}>
-                                    <Col span={8} style={{backgroundColor:'white',  color:'black'}}>
+                                    {/* <Col span={8} style={{backgroundColor:'white',  color:'black'}}>
                                        
                                     </Col>
-                                    <Col span={1} />
-                                    <Col span={15} style={{backgroundColor:'white', color:'black'}}>
-                                        
+                                    <Col span={1} /> */}
+                                    <Col span={24} style={{backgroundColor:'white', color:'black'}}>
+                                        <Chatroom restaurant={restaurant} name="Edwin"/>
                                     </Col>
                                 </Row>
                                 

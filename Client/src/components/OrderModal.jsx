@@ -47,7 +47,7 @@ class OrderModal extends Component {
     addToOrder = value => {
         this.setState({
             orderValues: [...this.state.orderValues, value],
-            data: [...this.state.data, {content: (<div><p style={{fontSize:'9px'}}>{value}</p></div>)}],
+            data: [...this.state.data, {content: (<div><p style={{fontSize:'13px'}}>{value}</p></div>)}],
         })
     }
 
@@ -68,7 +68,7 @@ class OrderModal extends Component {
         const restaurantTitle = [{
             content: (
               <div>
-                  <b style={{fontSize:'10px'}}>{restaurant.title}</b>
+                  <b style={{fontSize:'13px'}}>{restaurant.title}</b>
                   {/* <p style={{fontSize:'9px'}}>{restaurant.formatted_address}</p> */}
               </div>
             ),
@@ -93,7 +93,7 @@ class OrderModal extends Component {
                     ]}
                 >
                 <Row>
-                    <Col span={16}>
+                    <Col span={13}>
                         <h2>Checkout</h2>
                         <TextField id="standard-basic" label="Name" onChange={this.onChange}/>
                         <p></p>
@@ -105,16 +105,16 @@ class OrderModal extends Component {
                         <p></p>
                         <TextField id="standard-basic" label="Expiration Year" onChange={this.onChange}/>
                     </Col>
-                    <Col span={8}>
+                    <Col span={11}>
                         <h3>Order Summary</h3>
-                        <Card style={{backgroundColor:'#F9DE92', borderRadius: '6px', color:'black', overflowY:'scroll', height:'50vh'}}>
+                        <Card style={{backgroundColor:'#F9EEDA', borderRadius: '6px', color:'black', overflowY:'scroll', height:'30vh'}}>
                             <List
                                 className="comment-list"
                                 itemLayout="horizontal"
                                 dataSource={newData}
                                 renderItem={item => (
                                     <div>
-                                        <li >
+                                        <li style = {{marginBottom:'-20px'}}>
                                             <Comment
                                             content={item.content}
                                             />
