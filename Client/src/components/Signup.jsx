@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import { Input, Row, Col, Form, Button } from 'antd';
 
-import { Link } from "react-router-dom";
+import { Link,Redirect} from "react-router-dom";
 
 import TextField from '@material-ui/core/TextField';
 import yellowLogo from '../assets/yellowLogo.png';
@@ -22,6 +22,10 @@ const { Search } = Input;
 
 class Signup extends Component {
 
+    state = {
+        redirect:false
+    }
+
     onFinish = values => {
         console.log('Success:', values);
 
@@ -34,7 +38,9 @@ class Signup extends Component {
         }
 
         axios.post('http://localhost:5000/users/add', user)
-            .then(res=> { console.log("User Added!!") })
+            .then(res=> { 
+                this.setState({redirect:true})
+                console.log("User Added!!") })
     };
     
     onFinishFailed = errorInfo => {
@@ -42,6 +48,9 @@ class Signup extends Component {
     };
 
     render() {
+        if(this.state.redirect){
+            return <Redirect to="/"/>
+        }
         return (
             <header className="sign-up-centered" style={{color: 'black', textAlign:'left'}}>
                 

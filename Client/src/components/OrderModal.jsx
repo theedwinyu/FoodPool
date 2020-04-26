@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Cookie from 'js-cookie'
+import axios from 'axios'
+import { Link,Redirect} from "react-router-dom";
 
 import { Modal, Button, Row, Col, List, Comment, Input, Card, Divider } from 'antd';
 import TextField from '@material-ui/core/TextField';
@@ -12,13 +15,13 @@ const { Search } = Input;
 
 class OrderModal extends Component {
 
+
     constructor(props){
         super(props);
         this.state = {
             visible: false,
             orderValues: [],
             data: [],
-            done: false,
         }
     }
 
@@ -29,8 +32,6 @@ class OrderModal extends Component {
       };
     
     handleOk = e => {
-        console.log(this.state.orderValues);
-
         this.setState({
             done: true,
         });
@@ -56,6 +57,9 @@ class OrderModal extends Component {
     }
 
     render() {
+        if(this.state.redirect) {
+            return <Redirect to="room"/>
+        }
         const {
             restaurant,
         } = this.props;
