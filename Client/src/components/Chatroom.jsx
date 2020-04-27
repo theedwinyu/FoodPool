@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Comment, Avatar, Form, Button, List, Input, Empty ,Typography, Card, Divider, Row, Col } from 'antd';
 import moment from 'moment';
 import axios from 'axios';
+import Cookie from 'js-cookie'
 
 import Map from './Map';
 import GroupInfo from './GroupInfo';
@@ -89,7 +90,7 @@ class Chatroom extends Component {
                             content: <Card style={{borderRadius: '12px'}}><p>{message}</p></Card>,
                             style: this.formatStyle(true),
                         },
-                        ...this.state.comment       
+                        ...this.state.comments,
                     ],
                 })
             }  
@@ -156,8 +157,8 @@ class Chatroom extends Component {
             roomUsers,
             distance,
             name,
+            driverName,
         } = this.props;
-        console.log(restaurant)
         const { comments, submitting, value } = this.state;
         return (
             <div>
@@ -191,7 +192,7 @@ class Chatroom extends Component {
                             <Col style={{ borderRadius: '12px', backgroundColor:'white',  color:'black', height: '28vh', width: '50vh', marginTop: '15px'}} >
                                 <Card style = {{borderRadius: '12px'}} title = "Route details">
                                     <p>Shortest Possible Route distance: {distance || 'N/A'} miles</p>
-                                    <p>Driver: {name}</p>
+                                    <p>Driver: {driverName}</p>
                                 </Card>
                             </Col>
 
@@ -207,12 +208,12 @@ class Chatroom extends Component {
 
 Chatroom.defaultProps = {
     distance: null,
-    name: 'None',
+    driverName: 'None',
 };
 
 Chatroom.propTypes = {
     distance: PropTypes.number,
-    name: PropTypes.string,
+    driverName: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
@@ -223,7 +224,7 @@ const mapStateToProps = (state) => {
 
     return {
         distance,
-        name: message,
+        driverName: message,
     };
 };
   
